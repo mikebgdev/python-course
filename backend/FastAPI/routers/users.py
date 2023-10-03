@@ -26,22 +26,22 @@ async def usersjson():
             {"name": "User", "surname": "Random", "url": "https://user.com", "age": 33}]
 
 
-@router.get("/users")
+@router.get("/")
 async def users():
     return users_list
 
 
-@router.get("/user/{id}")  # Path
+@router.get("/{id}")  # Path
 async def user(id: int):
     return search_user(id)
 
 
-@router.get("/user/")  # Query
+@router.get("/")  # Query
 async def user(id: int):
     return search_user(id)
 
 
-@router.post("/user/", response_model=User, status_code=201)
+@router.post("/", response_model=User, status_code=201)
 async def user(user: User):
     if type(search_user(user.id)) == User:
         raise HTTPException(status_code=404, detail="El usuario ya existe")
@@ -50,7 +50,7 @@ async def user(user: User):
     return user
 
 
-@router.put("/user/")
+@router.put("/")
 async def user(user: User):
     found = False
 
@@ -65,7 +65,7 @@ async def user(user: User):
     return user
 
 
-@router.delete("/user/{id}")
+@router.delete("/{id}")
 async def user(id: int):
     found = False
 
